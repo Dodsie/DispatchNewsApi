@@ -95,6 +95,12 @@ const addFavorite = (request, response) => {
   );
 };
 
+// const deleteFavorite = (request, response) => {
+//   pool.query(``
+
+//   )
+// }
+
 const getArticles = (request, response) => {
   pool.query(
     `SELECT * FROM articles`,
