@@ -8,7 +8,6 @@ const cors = require('cors');
 
 const http = require("http");
 const { Server } = require("socket.io");
-
 const server = http.createServer(app);
 
 
@@ -79,3 +78,7 @@ app.get("/articles", db.getArticles);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
+
+
+
+server.listen(3000, () => console.log('Server running on port 3000'));
