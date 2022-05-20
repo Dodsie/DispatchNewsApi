@@ -1,17 +1,25 @@
 //database
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const db = require("./queries");
 const app = express();
 const port = 3001;
-const cors = require('cors');
+// const cors = require('cors');
 
 
+<<<<<<< HEAD
 // const http = require("http");
 // const { Server } = require("socket.io");
+=======
+
+const http = require("http");
+// const { Server } = require("socket.io");
+const server = http.createServer(app);
+>>>>>>> d6187db9fdb43978c8856241d397904635d6629d
 
 // const server = http.createServer(app);
 
+<<<<<<< HEAD
 //database
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,10 +28,28 @@ app.use(
     extended: true,
   })
 );
+=======
+// app.use(cors());
+// app.use(bodyParser.json());
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true,
+//   })
+// );
+>>>>>>> d6187db9fdb43978c8856241d397904635d6629d
 
 
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
 
+// io.on("connection", (socket) => {
+//   console.log(`User Connected: ${socket.id}`);
 
+<<<<<<< HEAD
 // const io = new Server(server, {
 //   cors: {
 //     origin: "http://localhost:3001",
@@ -48,6 +74,22 @@ app.use(
 //   });
 // });
 
+=======
+//   socket.on("join_room", (data) => {
+//     socket.join(data);
+//     console.log(`User with ID: ${socket.id} joined room: ${data}`);
+//   });
+
+//   socket.on("send_message", (data) => {
+//     socket.to(data.room).emit("receive_message", data);
+//   });
+
+//   socket.on("disconnect", () => {
+//     console.log("User Disconnected", socket.id);
+//   });
+// });
+
+>>>>>>> d6187db9fdb43978c8856241d397904635d6629d
 // server.listen(3001, () => {
 //   console.log("SERVER RUNNING");
 // });
@@ -82,3 +124,7 @@ app.delete("/delete/:id/:publishedat", db.deleteFavArticles);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
+
+
+
+server.listen(3000, () => console.log('Server running on port 3000'));
