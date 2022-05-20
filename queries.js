@@ -80,12 +80,11 @@ const getFavorite = (request, response) => {
 const addFavorite = (request, response) => {
   const id = parseInt(request.params.id);
   console.log(request.body);
-  // const query = `author, content, description, publishedAt, source, title, url, urlToImage, user_id`;
   const { author, content, description, publishedAt, source, title, url, urlToImage } = request.body;
   const queryString = `INSERT INTO articles (author, content, description, publishedAt, source, title, url, urlToImage, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
   console.log(queryString);
   pool.query(
-    queryString,[author,content, description, publishedAt, source, title, url, urlToImage, id],
+    queryString,[author, content, description, publishedAt, source, title, url, urlToImage, id],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -101,14 +100,19 @@ const addFavorite = (request, response) => {
 //   )
 // }
 
-const getArticles = (request, response) => {
+const deleteFavArticles = (request, response) => {
+  const id = parseInt(request.params.id);
+  const publishedat = (request.params.publishedat);
+  console.log('userid', id);
+  console.log('PA', publishedat);
+  console.log('type article id',typeof publishedat);
   pool.query(
-    `SELECT * FROM articles`,
+    `DELETE FROM articles WHERE articles.publishedat = $1 AND user_id = $2`,[publishedat, id],
     (error, results) => {
       if (error) {
-        throw error;
+        console.log(error);
       }
-      response.status(200).json(results.rows);
+      console.log(results);
     }
   );
 };
@@ -121,5 +125,5 @@ module.exports = {
   deleteUser,
   getFavorite,
   addFavorite,
-  getArticles
+  deleteFavArticles,
 };

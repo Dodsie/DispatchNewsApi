@@ -1,3 +1,4 @@
+//database
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./queries");
@@ -6,12 +7,12 @@ const port = 3001;
 const cors = require('cors');
 
 
-const http = require("http");
-const { Server } = require("socket.io");
+// const http = require("http");
+// const { Server } = require("socket.io");
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
-
+//database
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -23,33 +24,33 @@ app.use(
 
 
 
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3001",
+//     methods: ["GET", "POST"],
+//   },
+// });
 
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+// io.on("connection", (socket) => {
+//   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
-  });
+//   socket.on("join_room", (data) => {
+//     socket.join(data);
+//     console.log(`User with ID: ${socket.id} joined room: ${data}`);
+//   });
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
+//   socket.on("send_message", (data) => {
+//     socket.to(data.room).emit("receive_message", data);
+//   });
 
-  socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
-  });
-});
+//   socket.on("disconnect", () => {
+//     console.log("User Disconnected", socket.id);
+//   });
+// });
 
-server.listen(3001, () => {
-  console.log("SERVER RUNNING");
-});
+// server.listen(3001, () => {
+//   console.log("SERVER RUNNING");
+// });
 
 
 
@@ -74,7 +75,9 @@ app.get("/favorite/:id", db.getFavorite);
 
 app.post("/addfav/:id", db.addFavorite);
 
-app.get("/articles", db.getArticles);
+// app.get("/articles", db.getArticles);
+
+app.delete("/delete/:id/:publishedat", db.deleteFavArticles);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
