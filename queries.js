@@ -112,7 +112,7 @@ const deleteFavArticles = (request, response) => {
       if (error) {
         console.log(error);
       }
-      console.log(results);
+      response.status(200).send(results);
     }
   );
 };
